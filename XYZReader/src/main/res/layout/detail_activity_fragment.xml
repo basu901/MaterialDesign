@@ -20,7 +20,7 @@
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
             app:contentScrim="?attr/colorPrimary">
-            
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -29,11 +29,8 @@
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"/>
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/detail_toolbar"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_width="match_parent"
-                app:layout_collapseMode="pin"/>
+            <include layout="@layout/toolbar"/>
+
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -64,7 +61,18 @@
                 android:textColor="@android:color/black"
                 android:id="@+id/detail_article_text"/>
 
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:id="@+id/share_fab"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_share"
+                app:layout_anchorGravity="bottom|right|end" />
+
         </LinearLayout>
+
+
 
     </android.support.v4.widget.NestedScrollView>
 

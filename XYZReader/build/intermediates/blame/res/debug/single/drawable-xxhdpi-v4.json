@@ -80,6 +80,10 @@
         "source": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
+        "merged": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_back.png",
+        "source": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\src\\main\\res\\drawable-xxhdpi\\ic_back.png"
+    },
+    {
         "merged": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_arrow_back.png",
         "source": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\src\\main\\res\\drawable-xxhdpi\\ic_arrow_back.png"
     },

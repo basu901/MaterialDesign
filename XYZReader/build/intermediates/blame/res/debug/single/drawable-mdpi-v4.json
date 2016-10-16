@@ -156,6 +156,10 @@
         "source": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_back.png",
+        "source": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\src\\main\\res\\drawable-mdpi\\ic_back.png"
+    },
+    {
         "merged": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
         "source": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },

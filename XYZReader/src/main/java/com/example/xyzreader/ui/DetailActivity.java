@@ -54,6 +54,7 @@ public class DetailActivity extends AppCompatActivity {
         window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+
         Long mItemId=getIntent().getLongExtra("item_id",-1);
         //DetailActivityFragment detailActivityFragment = new DetailActivityFragment();
         //detailActivityFragment.setArguments(args);
@@ -82,34 +83,6 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-   /* public void onDelete(MenuItem menuItem){
-        Log.v("Detail","checker");
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mCursor.moveToPosition(position);
-                String id=mCursor.getString(mCursor.getColumnIndex(ItemsContract.Items._ID));
-                addElements.add(id);
-                getContentResolver().delete(ItemsContract.Items.buildDirUri(),ItemsContract.Items._ID+" = ? ",new String[]{id});
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        viewPager.setCurrentItem(getItem(1),true);
-    }
-
-
-    private int getItem(int i){
-        return viewPager.getCurrentItem()+i;
-    }*/
 
 
     class CustomPagerAdapter extends FragmentStatePagerAdapter{

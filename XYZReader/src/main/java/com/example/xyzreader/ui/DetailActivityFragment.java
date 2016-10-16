@@ -1,9 +1,14 @@
 package com.example.xyzreader.ui;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.RippleDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +35,7 @@ public class DetailActivityFragment extends Fragment {
 
     String url,published_date,author,title,body,aspect_ratio;
     Long itemId;
-
+    View rootView;
 
     public DetailActivityFragment(){}
 
@@ -52,16 +57,13 @@ public class DetailActivityFragment extends Fragment {
 
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.main,menu);
-        super.onCreateOptionsMenu(menu,inflater);
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.detail_activity_fragment, container, false);
+        return rootView;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View rootView=inflater.inflate(R.layout.detail_activity_fragment,container,false);
-        setHasOptionsMenu(true);
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
         Uri uri= ItemsContract.Items.buildItemUri(itemId);
         Cursor cursor=getActivity().getContentResolver().query(uri,new String[]{ItemsContract.Items._ID,
                 ItemsContract.Items.TITLE,
@@ -73,10 +75,19 @@ public class DetailActivityFragment extends Fragment {
                 ItemsContract.Items.BODY},null,null,null);
 
         TextView article_details=(TextView)rootView.findViewById(R.id.detail_subtitle);
-        TextView article_body=(TextView)rootView.findViewById(R.id.detail_article_text);
-
+        final TextView article_body=(TextView)rootView.findViewById(R.id.detail_article_text);
         ImageView imageView=(ImageView)rootView.findViewById(R.id.detail_toolbar_image);
+        ImageView back_image=(ImageView)rootView.findViewById(R.id.arrow_back);
+        back_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+
+
         Toolbar toolbar=(Toolbar)rootView.findViewById(R.id.detail_toolbar);
+
         final CollapsingToolbarLayout collapsingToolbarLayout=(CollapsingToolbarLayout)rootView.findViewById(R.id.detail_collapsing);
         try{
             if(cursor.moveToFirst()) {
@@ -101,14 +112,14 @@ public class DetailActivityFragment extends Fragment {
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbarLayout.setTitle(title);
 
         //imageView.setAspectRatio(Float.parseFloat(aspect_ratio));
         Picasso.with(getActivity().getApplicationContext()).load(url).into(imageView);
 
-        String body_details="by "+author+", "+ Html.fromHtml(DateUtils.getRelativeTimeSpanString(
+        final String body_details="by "+author+", "+ Html.fromHtml(DateUtils.getRelativeTimeSpanString(
                 Long.parseLong(published_date),
                 System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
                 DateUtils.FORMAT_ABBREV_ALL).toString());
@@ -120,6 +131,17 @@ public class DetailActivityFragment extends Fragment {
         article_details.setText(body_details);
         article_body.setText(body_text);
 
+        FloatingActionButton share_button=(FloatingActionButton) rootView.findViewById(R.id.share_fab);
+        share_button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                Intent sharing_intent=new Intent(Intent.ACTION_SEND);
+                sharing_intent.setType("text");
+                sharing_intent.putExtra(android.content.Intent.EXTRA_TEXT,body_details);
+                startActivity(Intent.createChooser(sharing_intent, "Share using"));
+            }
+        });
+
+
         /*Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
 
             @Override
@@ -128,7 +150,6 @@ public class DetailActivityFragment extends Fragment {
 
             }
         });*/
-        return rootView;
     }
 
 
