@@ -12,6 +12,10 @@
         "source": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
+        "merged": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_delete.png",
+        "source": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\src\\main\\res\\drawable-xhdpi\\ic_delete.png"
+    },
+    {
         "merged": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png",
         "source": "C:\\Users\\shaunak basu\\AndroidStudioProjects\\MaterialDesign\\XYZReader\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png"
     },

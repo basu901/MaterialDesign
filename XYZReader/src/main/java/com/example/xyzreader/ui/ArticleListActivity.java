@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -25,6 +26,8 @@ import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
 import com.example.xyzreader.data.UpdaterService;
+
+import java.util.ArrayList;
 
 /**
  * An activity representing a list of Articles. This activity has different presentations for
@@ -156,8 +159,10 @@ public class ArticleListActivity extends AppCompatActivity implements
                             ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));*/
                     Intent intent=new Intent(getApplicationContext(),DetailActivity.class);
                     String data=ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())).toString();
+                    Cursor c=getContentResolver().query(Uri.parse(data),new String[]{ItemsContract.Items._ID},null,null,null);
                     Log.v("In List Activity",data);
-                    intent.putExtra("URI",data);
+                    c.moveToFirst();
+                    intent.putExtra("item_id",Long.parseLong(c.getString(c.getColumnIndex(ItemsContract.Items._ID))));
                     startActivity(intent);
                 }
             });
