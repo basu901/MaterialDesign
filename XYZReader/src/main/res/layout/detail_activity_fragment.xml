@@ -72,22 +72,21 @@
                 android:layout_marginRight="8dp"
                 android:textSize="14sp"/>
 
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                app:fabSize="normal"
-                android:id="@+id/share_fab"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_share"
-                app:pressedTranslationZ="12dp"
-                app:elevation="6dp"
-                app:layout_anchorGravity="bottom|right|end" />
 
         </LinearLayout>
 
-
-
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        android:id="@+id/share_fab"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_share"
+        app:pressedTranslationZ="6dp"
+        app:layout_anchorGravity="bottom|right|end" />
 
 </android.support.design.widget.CoordinatorLayout>
