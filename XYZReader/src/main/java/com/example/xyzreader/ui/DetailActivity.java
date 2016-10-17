@@ -50,16 +50,9 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.detail_activity);
-        Window window = getWindow();
-        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
 
         Long mItemId=getIntent().getLongExtra("item_id",-1);
-        //DetailActivityFragment detailActivityFragment = new DetailActivityFragment();
-        //detailActivityFragment.setArguments(args);
 
-        //getSupportFragmentManager().beginTransaction().add(R.id.pager_reader, detailActivityFragment).commit();
 
         viewPager = (ViewPager) findViewById(R.id.pager_reader);
         CustomPagerAdapter customPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager());

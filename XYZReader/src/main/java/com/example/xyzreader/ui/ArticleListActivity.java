@@ -6,9 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
+import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -38,20 +44,22 @@ import java.util.ArrayList;
 public class ArticleListActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    private Toolbar mToolbar;
+   private Toolbar mToolbar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
+    private CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_list);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+       mToolbar = (Toolbar) findViewById(R.id.toolbar);
+       setSupportActionBar(mToolbar);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+       getSupportActionBar().setDisplayShowTitleEnabled(false);
+       getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        coordinatorLayout=(CoordinatorLayout) findViewById(R.id.main_content);
 
         final View toolbarContainerView = findViewById(R.id.toolbar_container);
 
@@ -124,7 +132,11 @@ public class ArticleListActivity extends AppCompatActivity implements
         Adapter adapter = new Adapter(cursor);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
-        int columnCount = getResources().getInteger(R.integer.list_column_count);
+        int columnCount;
+        if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT)
+            columnCount=getResources().getInteger(R.integer.list_column_count);
+        else
+            columnCount=getResources().getInteger(R.integer.portrait_column_count);
         StaggeredGridLayoutManager sglm =
                 new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(sglm);
@@ -171,6 +183,14 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
+            if(position==(mCursor.getCount()-1)){
+                Snackbar snackbar= Snackbar.make(coordinatorLayout,getText(R.string.snackbar_message),Snackbar.LENGTH_LONG);
+                View sn_view=snackbar.getView();
+                sn_view.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.primary_accent));
+                TextView textView = (TextView) sn_view.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(Color.BLACK);
+                snackbar.show();
+            }
             mCursor.moveToPosition(position);
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             holder.subtitleView.setText(

@@ -1,7 +1,9 @@
 package com.example.xyzreader.ui;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.graphics.drawable.RippleDrawable;
 import android.media.Image;
 import android.net.Uri;
@@ -24,9 +26,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.andexert.library.RippleView;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ItemsContract;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 /**
  * Created by shaunak basu on 15-10-2016.
@@ -62,9 +67,14 @@ public class DetailActivityFragment extends Fragment {
         return rootView;
     }
 
+
+
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         Uri uri= ItemsContract.Items.buildItemUri(itemId);
+        Typeface roboto_condensed_light=Typeface.createFromAsset(getActivity().getAssets(),"font/RobotoCondensed-Light.ttf");
+        Typeface roboto_condensed_regular=Typeface.createFromAsset(getActivity().getAssets(),"font/RobotoCondensed-Regular.ttf");
+
         Cursor cursor=getActivity().getContentResolver().query(uri,new String[]{ItemsContract.Items._ID,
                 ItemsContract.Items.TITLE,
                 ItemsContract.Items.PUBLISHED_DATE,
@@ -74,21 +84,6 @@ public class DetailActivityFragment extends Fragment {
                 ItemsContract.Items.ASPECT_RATIO,
                 ItemsContract.Items.BODY},null,null,null);
 
-        TextView article_details=(TextView)rootView.findViewById(R.id.detail_subtitle);
-        final TextView article_body=(TextView)rootView.findViewById(R.id.detail_article_text);
-        ImageView imageView=(ImageView)rootView.findViewById(R.id.detail_toolbar_image);
-        ImageView back_image=(ImageView)rootView.findViewById(R.id.arrow_back);
-        back_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
-
-
-        Toolbar toolbar=(Toolbar)rootView.findViewById(R.id.detail_toolbar);
-
-        final CollapsingToolbarLayout collapsingToolbarLayout=(CollapsingToolbarLayout)rootView.findViewById(R.id.detail_collapsing);
         try{
             if(cursor.moveToFirst()) {
                 url = cursor.getString(cursor.getColumnIndex(ItemsContract.Items.PHOTO_URL));
@@ -104,17 +99,50 @@ public class DetailActivityFragment extends Fragment {
                 Log.v("In detail activity:",aspect_ratio);
                 body=cursor.getString(cursor.getColumnIndex(ItemsContract.Items.BODY));
                 Log.v("In detail activity:",body);
+                    }
+                }catch(NullPointerException e){
+                Log.v("In DETAIL ACTIVITY","NO cursor result");
             }
-        }catch(NullPointerException e){
-            Log.v("In DETAIL ACTIVITY","NO cursor result");
+
+
+        if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
+
+            CollapsingToolbarLayout collapsingToolbarLayout=(CollapsingToolbarLayout)rootView.findViewById(R.id.detail_collapsing);
+
+            collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
+            collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
+
+
+            collapsingToolbarLayout.setTitle(title);
+            collapsingToolbarLayout.setCollapsedTitleTypeface(roboto_condensed_regular);
+
+
+
         }
-        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
-        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
+        else{
+            Toolbar toolbar=(Toolbar)rootView.findViewById(R.id.detail_toolbar);
+            toolbar.setBackgroundColor(getResources().getColor(R.color.primary));
+            TextView title_view=(TextView)rootView.findViewById(R.id.land_title);
+            title_view.setText(title);
+            title_view.setTypeface(roboto_condensed_regular);
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
-        collapsingToolbarLayout.setTitle(title);
+        RippleView rippleView=(RippleView) rootView.findViewById(R.id.ripple_view);
+
+        rippleView.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+            @Override
+            public void onComplete(RippleView rippleView) {
+                getActivity().onBackPressed();
+            }
+        });
+
+
+
+        ImageView imageView=(ImageView)rootView.findViewById(R.id.detail_toolbar_image);
+
+        TextView article_details=(TextView)rootView.findViewById(R.id.detail_subtitle);
+        TextView article_body=(TextView)rootView.findViewById(R.id.detail_article_text);
 
         //imageView.setAspectRatio(Float.parseFloat(aspect_ratio));
         Picasso.with(getActivity().getApplicationContext()).load(url).into(imageView);
@@ -123,11 +151,11 @@ public class DetailActivityFragment extends Fragment {
                 Long.parseLong(published_date),
                 System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
                 DateUtils.FORMAT_ABBREV_ALL).toString());
-        String body_text=Html.fromHtml(body).toString();
+        final String body_text=Html.fromHtml(body).toString();
 
 
-        //Bitmap bitmap = Bitmap.createBitmap(imageView.getWidth(),imageView.getHeight(),Bitmap.Config.ARGB_8888);
-
+        article_details.setTypeface(roboto_condensed_light);
+        article_body.setTypeface(roboto_condensed_light);
         article_details.setText(body_details);
         article_body.setText(body_text);
 
@@ -135,21 +163,14 @@ public class DetailActivityFragment extends Fragment {
         share_button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Intent sharing_intent=new Intent(Intent.ACTION_SEND);
-                sharing_intent.setType("text");
-                sharing_intent.putExtra(android.content.Intent.EXTRA_TEXT,body_details);
-                startActivity(Intent.createChooser(sharing_intent, "Share using"));
+                sharing_intent.setType("text/plain");
+                String share_data=title+"\n"+"\n"+body_details+"\n"+"\n"+body_text;
+                sharing_intent.putExtra(Intent.EXTRA_TEXT,share_data);
+                startActivity(sharing_intent);
             }
         });
 
 
-        /*Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-
-            @Override
-            public void onGenerated(Palette palette) {
-                collapsingToolbarLayout.setContentScrimColor(palette.getMutedColor(getResources().getColor(R.color.primary)));
-
-            }
-        });*/
     }
 
 

@@ -4,38 +4,56 @@
     api-level="23"
     density="xhdpi"
     format="7"
-    timestamp="194013605764693"
+    timestamp="241857875072426"
     token="4598799678966428116" >
 
     <task
         name="javac"
-        duration="378" />
+        duration="758" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="24" />
+        duration="308" />
     <task
         name="verifier"
-        duration="7" />
+        duration="48" />
 
     <artifact
         location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\intermediates\res\resources-debug.ap_"
         type="RESOURCES" />
     <artifact
+        location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\intermediates\transforms\dex\debug\folders\1000\5\slice_2\classes.dex"
+        type="DEX" />
+    <artifact
+        location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
+        type="DEX" />
+    <artifact
+        location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\intermediates\transforms\dex\debug\folders\1000\5\slice_3\classes.dex"
+        type="DEX" />
+    <artifact
         location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
         type="DEX" />
 
-    <build timestamp="193129376344320" >
+    <build timestamp="236789850489600" >
         <artifact
             location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\outputs\apk\XYZReader-debug.apk"
             type="MAIN" />
     </build>
-    <build timestamp="194013605764693" >
+    <build timestamp="241857875072426" >
         <artifact
             location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\intermediates\res\resources-debug.ap_"
             type="RESOURCES" />
+        <artifact
+            location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\intermediates\transforms\dex\debug\folders\1000\5\slice_2\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\intermediates\transforms\dex\debug\folders\1000\5\slice_3\classes.dex"
+            type="DEX" />
         <artifact
             location="C:\Users\shaunak basu\AndroidStudioProjects\MaterialDesign\XYZReader\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
             type="DEX" />

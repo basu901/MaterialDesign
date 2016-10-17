@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     d<FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,22 +15,32 @@
             android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="?colorPrimary"
-            android:elevation="8dp">
+            android:background="?colorPrimary">
 
-            <android.support.v7.widget.Toolbar
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:fitsSystemWindows="true"
+                android:stateListAnimator="@drawable/app_bar_always_elevated">
+
+           <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
                 android:layout_marginLeft="@dimen/list_toolbar_side_margin"
                 android:layout_marginRight="@dimen/list_toolbar_side_margin"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/logo"
+                    android:layout_margin="8dp"
                     android:contentDescription="@string/app_name"/>
-            </android.support.v7.widget.Toolbar>
+              </android.support.v7.widget.Toolbar>
+
+            </android.support.design.widget.AppBarLayout>
+
 
         </FrameLayout>
 
@@ -39,13 +50,12 @@
             android:layout_marginTop="56dp"
             android:id="@+id/swipe_refresh_layout">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/primary_light"
-            android:layout_marginTop="56dp">
 
-
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_light"
+                android:layout_marginTop="56dp">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view"
@@ -58,14 +68,15 @@
                     android:paddingRight="@dimen/list_side_margin"
                     android:paddingBottom="28dp"/>
 
+            </FrameLayout>
 
-
-        </FrameLayout>
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
 
     </FrameLayout>
+
+
 
 </android.support.design.widget.CoordinatorLayout>
 
